@@ -29,6 +29,7 @@ INSERT INTO MODEL (title) VALUES  ('C1');
 INSERT INTO MODEL (title) VALUES  ('C2');
 INSERT INTO MODEL (title) VALUES  ('C3'); -- 3
 INSERT INTO MODEL (title) VALUES  ('A1');  --4 
+INSERT INTO MODEL (title) VALUES  ('A5');  --4 
 INSERT INTO MODEL (title) VALUES  ('208'); --5 
 INSERT INTO MODEL (title) VALUES  ('Fabia');--6
 
