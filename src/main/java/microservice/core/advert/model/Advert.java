@@ -13,20 +13,19 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import microservice.core.advert.model.additions.CarClass;
+import microservice.core.advert.model.additions.Fuel;
 import microservice.core.advert.model.additions.GearBoxType;
 import microservice.core.advert.model.additions.Manufacturer;
-
-
-
 
 @Entity
 @Table(name = "ADVERT")
 public class Advert {
-	
-
 		@Id
 	    @Column(name = "id")
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,10 +40,13 @@ public class Advert {
 		@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	    public Pricelist priceList;
 		
-	
 		@ManyToOne
 		@JoinColumn(name="manufacturer_id")
 		private Manufacturer manufacturer;
+		
+		@ManyToOne
+		@JoinColumn(name="fuel_id")
+		private Fuel fuel;
 		
 //		@ManyToOne
 //		@JoinColumn(name="model_id")	
@@ -58,8 +60,10 @@ public class Advert {
 		@JoinColumn(name="cclass_id")	
 		private CarClass cclass;
 		
-		@ManyToMany		
-		private List<RentingRequest> requests = new ArrayList<RentingRequest>();
+		@OneToMany(mappedBy = "advert")
+		@JsonIgnore
+		private List<RequestedCarTerm> requests = new ArrayList<RequestedCarTerm>();
+		
 		
 		private String imgmain;
 	
@@ -186,11 +190,13 @@ public class Advert {
 			this.imgmain = imgMain;
 		}
 
-		public List<RentingRequest> getRequests() {
-			return requests;
-		}
 
-		public void setRequests(List<RentingRequest> requests) {
-			this.requests = requests;
-		}
+		public Fuel getFuel() {
+		return fuel;
+	}
+
+	public void setFuel(Fuel fuel) {
+		this.fuel = fuel;
+	}
+
 }

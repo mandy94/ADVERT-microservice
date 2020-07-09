@@ -1,4 +1,4 @@
-package microservice.core.advert.controller;
+package microservice.core.advert.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;

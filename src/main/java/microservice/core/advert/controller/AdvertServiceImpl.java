@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import microservice.core.advert.model.Advert;
+import microservice.core.advert.repository.Advertrepository;
 
 
 @Service

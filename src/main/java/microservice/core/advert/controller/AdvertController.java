@@ -22,10 +22,11 @@ import org.springframework.web.client.RestTemplate;
 
 import microservice.core.advert.model.Advert;
 import microservice.core.advert.model.User;
+import microservice.core.advert.model.dto.AdvertDTO;
 
 
 @RestController
-@RequestMapping(value = "/advert", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AdvertController {
 
 	@Autowired
@@ -34,6 +35,7 @@ public class AdvertController {
 	protected RestTemplate restTemplate;
 	
 	private String serviceUrl = "http://localhost:8183/api/whoami";
+	private String userSrviceUrl = "http://localhost:8183/api/user/";
 	
 	@GetMapping("/all")
 	public List<Advert> getAllAds(@RequestHeader("Authorization") String header) throws AccessDeniedException {
@@ -43,16 +45,17 @@ public class AdvertController {
 	
 	@GetMapping("/me")
 	public List<Advert> getMyAds(@RequestHeader("Authorization") String header) throws AccessDeniedException {
-		System.out.println("Hello fro me xD"); 
-		HttpHeaders headers = new HttpHeaders();
-		    headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-		    headers.add("Authorization", header );
-		   HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
-		   
-		ResponseEntity<User> owner = restTemplate.exchange(serviceUrl, HttpMethod.GET,entity , User.class);
-		if(owner!=null)		
-				return adservice.findAll(owner.getBody().getId());
-		else
+//		HttpHeaders headers = new HttpHeaders();
+//		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+//		headers.add("Authorization", header );
+//		HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
+//		restTemplate = new RestTemplate();
+//		ResponseEntity<User> owner = restTemplate.exchange(serviceUrl, HttpMethod.GET,entity , User.class);
+//		if(owner!=null)		{
+//			System.out.println(owner.getBody());
+//				return adservice.findAll(owner.getBody().getId());
+//		}
+//		else
 			return null;
 	}
 	
