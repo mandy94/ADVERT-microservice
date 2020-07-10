@@ -55,7 +55,7 @@ INSERT INTO FUEL (title) VALUES ('Gas');
 INSERT INTO FUEL (title) VALUES ('Benzin');
 INSERT INTO FUEL (title) VALUES ('Nafta');
 
-INSERT INTO PRICELIST (cdw,price_per_day, price_per_km, creator_id, name) VALUES (12000, 3200, 500, 5, 'Prvi');
+INSERT INTO PRICELIST (cdw,price_per_day, price_per_km, creator_id, name) VALUES (12000, 3200, 500, 4, 'Prvi');
 INSERT INTO PRICELIST (cdw,price_per_day, price_per_km, creator_id, name) VALUES (12000, 3000, 700, 5, 'Drugi');
 INSERT INTO PRICELIST (cdw,price_per_day, price_per_km, creator_id, name) VALUES (10000, 1200, 500, 5, 'Treci');
 INSERT INTO PRICELIST (cdw,price_per_day, price_per_km, creator_id, name) VALUES (0, 1000, 100, 5, 'Cetvrti');

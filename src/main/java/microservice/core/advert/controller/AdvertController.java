@@ -81,12 +81,22 @@ public class AdvertController {
 	@PostMapping(value = "/add",
 			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public void addAdvert(@RequestBody Advert ad) throws AccessDeniedException{		
-		Advert a = new Advert();
-		a.setTitle("TEST");
-		a.setUser_id(ad.getUser_id());
+	public List<Advert> addAdvert(@RequestHeader("Authorization") String header,@RequestBody Advert ad) throws AccessDeniedException{		
+				
 		
-		adservice.save(a);	
+		HttpHeaders headers = new HttpHeaders();
+		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+		headers.add("Authorization", header );
+		HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
+		restTemplate = new RestTemplate();
+		ResponseEntity<User> owner = restTemplate.exchange(serviceUrl, HttpMethod.GET,entity , User.class);
+		ad.setUser_id(owner.getBody().getId());
+		adservice.save(ad);
+		if(owner!=null)		{			
+				return adservice.findAll(owner.getBody().getId());
+		}
+		else
+			return null;
 	}
 	
 	@PostMapping("/search")
