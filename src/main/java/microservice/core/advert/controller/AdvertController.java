@@ -60,8 +60,7 @@ public class AdvertController {
 		HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
 		restTemplate = new RestTemplate();
 		ResponseEntity<User> owner = restTemplate.exchange(serviceUrl, HttpMethod.GET,entity , User.class);
-		if(owner!=null)		{
-			System.out.println(owner.getBody());
+		if(owner!=null)		{			
 				return adservice.findAll(owner.getBody().getId());
 		}
 		else
@@ -107,7 +106,6 @@ public class AdvertController {
 			pass = false;
 
 			for(Manufacturer mf: attr.getManufacturers()) {  // MANUFACTURERS
-				System.out.println(ad.getManufacturer().getId() == mf.getId());
 				if(ad.getManufacturer().getId()==mf.getId())
 				{pass = true; break;}
 			}

@@ -34,7 +34,7 @@ public class CodebookController {
 		return cdservice.getAll();
 	}
 	
-	@GetMapping("/cities")
+	@GetMapping("/city/all")
 	public List<City> getCities() {		
 		return cdservice.getCities();
 	}
@@ -57,7 +57,7 @@ public class CodebookController {
 		return cdservice.editCity(id, newName);
 	}
 //--------------------------------------------------------------------------------	
-	@GetMapping("/models")
+	@GetMapping("/model/all")
 	public List<Model> getModels() {		
 		return cdservice.getModels();
 	}
@@ -80,7 +80,7 @@ public class CodebookController {
 		return cdservice.editModel(id, newName);
 	}
 //--------------------------------------------------------------------------------
-	@GetMapping("/manufacturers")
+	@GetMapping("/manufacturer/all")
 	public List<Manufacturer> getManufacturers() {		
 		return cdservice.getManufacturers();
 	}
@@ -103,7 +103,7 @@ public class CodebookController {
 		return cdservice.editManufacturer(id, newName);
 	}
 //--------------------------------------------------------------------------------
-	@GetMapping("/fuels")
+	@GetMapping("/fuel/all")
 	public List<Fuel> getFuels() {		
 		return cdservice.getFuels();
 	}	
@@ -126,7 +126,7 @@ public class CodebookController {
 		return cdservice.editFuel(id, newName);
 	}
 //--------------------------------------------------------------------------------
-	@GetMapping("/cclasses")
+	@GetMapping("/cclass/all")
 	public List<CarClass> getCarClasses() {		
 		return cdservice.getCarClasses();
 	}
@@ -148,7 +148,7 @@ public class CodebookController {
 		return cdservice.editCarClasses(id, newName);
 	}
 //--------------------------------------------------------------------------------
-	@GetMapping("/gears")
+	@GetMapping("/gear/all")
 	public List<GearBoxType> getGear() {		
 		return cdservice.getGearTypes();
 	}
