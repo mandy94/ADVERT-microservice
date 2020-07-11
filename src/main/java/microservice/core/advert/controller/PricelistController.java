@@ -21,9 +21,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import microservice.core.advert.model.Bonus;
 import microservice.core.advert.model.Pricelist;
 import microservice.core.advert.model.User;
 import microservice.core.advert.model.dto.PricelistDTO;
+import microservice.core.advert.repository.BonusRepository;
 
 @RestController
 @RequestMapping(value="api/pricelist", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -31,6 +33,8 @@ public class PricelistController {
 	
 	@Autowired
 	private PricelistService plservice;
+	@Autowired
+	private BonusRepository bonusrepo;
 	
 	protected RestTemplate restTemplate;
 	
@@ -41,6 +45,23 @@ public class PricelistController {
 	public List<Pricelist> getAllPricelists() throws AccessDeniedException {
 		
 			return null;
+	}
+	@GetMapping("/bonuses/me")
+	public List<Bonus> getMyBonuses(@RequestHeader("Authorization") String header)throws AccessDeniedException {
+		User me = authorizeMe(header).getBody();
+		return bonusrepo.findByCreator(me.getId());		
+		
+	}
+	@PostMapping("/bonus/new")
+	public List<Bonus> getMyBonuses(@RequestHeader("Authorization") String header, @RequestBody Bonus data)throws AccessDeniedException {
+		User me = authorizeMe(header).getBody();		
+		Bonus nb = new Bonus();
+		nb.setCreator(data.getCreator());
+		nb.setValue(data.getValue());
+		bonusrepo.save(nb);
+		
+		return bonusrepo.findByCreator(me.getId());		
+		
 	}
 	
 	@GetMapping("/me")
@@ -73,6 +94,7 @@ public class PricelistController {
 		newpl.setPricePerDay(data.getPricePerDay());
 		newpl.setPricePerKm(data.getPricePerKm());
 		newpl.setCreator(me);
+		newpl.setBonus(data.getBonus());
 		newpl.setName(data.getName());
 		
 		plservice.save(newpl);

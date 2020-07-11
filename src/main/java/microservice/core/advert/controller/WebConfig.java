@@ -16,7 +16,9 @@ public class WebConfig implements WebMvcConfigurer {
     	// localhost:4200
         registry.addMapping("/**")
 		        .allowedOrigins("*")
-		        .allowedMethods("*");
+		        .allowedMethods("*")
+		        .allowedHeaders("*")
+		        .maxAge(3600);
     }
     
 }

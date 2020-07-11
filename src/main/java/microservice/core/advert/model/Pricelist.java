@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 @Entity
@@ -31,7 +33,10 @@ public class Pricelist {
     
     @Column
     private String name;
+    @Column
+    private Double bonus;
     
+    @JsonIgnore
     @OneToMany(mappedBy = "priceList", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public Set<Advert> advert;
     
@@ -98,6 +103,14 @@ public class Pricelist {
 	public String toString() {
 		return "Pricelist [id=" + id + ", pricePerDay=" + pricePerDay + ", pricePerKm=" + pricePerKm + ", cdw=" + cdw
 				+ ", name=" + name + "]";
+	}
+
+	public Double getBonus() {
+		return bonus;
+	}
+
+	public void setBonus(Double bonus) {
+		this.bonus = bonus;
 	}
     
     

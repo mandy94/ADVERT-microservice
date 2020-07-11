@@ -16,6 +16,7 @@ public class AdvertDTO {
 	}
 		private Long id;
 	    private String title;
+	    private String descrition;
 	    public Pricelist priceList;
 		private String manufacturer;
 		private String model;
@@ -123,6 +124,12 @@ public class AdvertDTO {
 		}
 		public void setCDWprotection(Boolean cDWprotection) {
 			CDWprotection = cDWprotection;
+		}
+		public String getDescrition() {
+			return descrition;
+		}
+		public void setDescrition(String descrition) {
+			this.descrition = descrition;
 		}
 		
 }

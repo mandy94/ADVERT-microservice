@@ -10,7 +10,7 @@ public class PricelistDTO {
 	    private double cdw;
 	    private long creatorId;
 	    private String name;
-	    
+	    private double bonus; 
 	    public PricelistDTO() {}
 
 	    public PricelistDTO(double pricePerDay, double pricePerKm, double cdw, long creatorId) {
@@ -80,6 +80,14 @@ public class PricelistDTO {
 		public String toString() {
 			return "PricelistDTO [id=" + id + ", pricePerDay=" + pricePerDay + ", pricePerKm=" + pricePerKm + ", cdw="
 					+ cdw + ", creatorId=" + creatorId + ", name=" + name + "]";
+		}
+
+		public double getBonus() {
+			return bonus;
+		}
+
+		public void setBonus(double bonus) {
+			this.bonus = bonus;
 		}
 	    
 	    

@@ -190,5 +190,35 @@ public class CodebookServiceImpl implements CodebookService {
 		return crepo.findAll();
 	}
 
+	@Override
+	public Model getModel(Long id) {
+		return mrepo.findById(id).orElse(null);
+	}
+
+	@Override
+	public Manufacturer getManufacturer(Long id) {
+		return mfrepo.findById(id).orElse(null);
+	}
+
+	@Override
+	public Fuel getFuel(Long id) {
+		return frepo.findById(id).orElse(null);
+	}
+
+	@Override
+	public CarClass getCarClass(Long id) {
+		return ccrepo.findById(id).orElse(null);	
+		}
+
+	@Override
+	public GearBoxType getGearType(Long id) {
+		return grepo.findById(id).orElse(null);
+	}
+
+	@Override
+	public City getCity(Long id) {
+		return crepo.findById(id).orElse(null);
+	}
+
 	
 	}

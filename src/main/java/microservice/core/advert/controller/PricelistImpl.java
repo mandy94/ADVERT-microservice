@@ -38,6 +38,11 @@ public class PricelistImpl implements PricelistService {
 		System.out.println(" Unutar serviza");
 		return priceListRepository.findAll();
 	}
+
+	@Override
+	public Pricelist getPriceList(long priceList) {
+		return priceListRepository.findById(priceList).orElse(null);
+	}
     
   
 
