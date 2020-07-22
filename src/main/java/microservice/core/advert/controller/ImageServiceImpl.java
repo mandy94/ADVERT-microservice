@@ -77,7 +77,6 @@ public class ImageServiceImpl implements ImageService {
 			if(retrievedImage==null) return null;
 			Image img = new Image(retrievedImage.getName(), retrievedImage.getType(),
 					decompressBytes(retrievedImage.getPicByte()));
-					System.out.println("IMage goet:" + img.getPicByte());
 			return img;
 		}
 
@@ -87,7 +86,6 @@ public class ImageServiceImpl implements ImageService {
 			if(retrievedImage == null) return null;
 			Image img = new Image(retrievedImage.getName(), retrievedImage.getType(),
 					decompressBytes(retrievedImage.getPicByte()));
-					System.out.println("IMage goet:" + img.getPicByte());
 			return img;
 			}
 

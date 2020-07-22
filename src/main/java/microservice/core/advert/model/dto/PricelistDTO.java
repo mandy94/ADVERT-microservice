@@ -13,19 +13,22 @@ public class PricelistDTO {
 	    private double bonus; 
 	    public PricelistDTO() {}
 
-	    public PricelistDTO(double pricePerDay, double pricePerKm, double cdw, long creatorId) {
+	    public PricelistDTO(double pricePerDay, double pricePerKm, double cdw, long creatorId, String name) {
 	        this.pricePerDay = pricePerDay;
 	        this.pricePerKm = pricePerKm;
 	        this.cdw = cdw;
 	        this.creatorId = creatorId;
+	        this.name = name;
 	    }
 
 	    public PricelistDTO(Pricelist priceList){
+	    	if(priceList.getCreator()!=null)
 	        this.creatorId=priceList.getCreator().getId();
 	        this.pricePerDay=priceList.getPricePerDay();
 	        this.pricePerKm=priceList.getPricePerKm();
 	        this.cdw=priceList.getCdw();
 	        this.id=priceList.getId();
+	        this.name = priceList.getName();
 	    }
 
 		public long getId() {

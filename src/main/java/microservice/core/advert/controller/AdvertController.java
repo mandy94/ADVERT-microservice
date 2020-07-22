@@ -26,7 +26,9 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import microservice.core.advert.model.Advert;
+import microservice.core.advert.model.Bonus;
 import microservice.core.advert.model.Image;
+import microservice.core.advert.model.Pricelist;
 import microservice.core.advert.model.SearchAttributes;
 import microservice.core.advert.model.User;
 import microservice.core.advert.model.additions.CarClass;
@@ -36,6 +38,7 @@ import microservice.core.advert.model.additions.Manufacturer;
 import microservice.core.advert.model.additions.Model;
 import microservice.core.advert.model.dto.AdvertDAO;
 import microservice.core.advert.model.dto.AdvertDTO;
+import microservice.core.advert.model.dto.PricelistDTO;
 
 
 @RestController
@@ -64,7 +67,16 @@ public class AdvertController {
 		return adservice.findAllAds();
 	}
 	
-	
+	@GetMapping("/advert/{id}/pricelist")
+	public PricelistDTO getPricelistByAdvert(@RequestHeader("Authorization") String header, @PathVariable Long id)throws AccessDeniedException {
+//		User me = authorizeMe(header).getBody();
+		PricelistDTO ret = new PricelistDTO(adservice.getAdvertsPriceList(id));
+		
+		System.out.println(ret);
+		return ret;
+//		return null;	
+		
+	}
 	
 	@GetMapping(value="/me", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Advert> getMyAds(@RequestHeader("Authorization") String header) throws AccessDeniedException {
@@ -132,9 +144,9 @@ public class AdvertController {
 	
 	@GetMapping(value= "/get-image/{imageName:.*}", produces = MediaType.ALL_VALUE)
 	public @ResponseBody byte[] getImage(@PathVariable("imageName") String imageName) throws IOException {
-			
-			
+			if(imgService.getImage(imageName) != null)
 			return imgService.getImage(imageName).getPicByte();
+			else return null;
 	}
 	
 
@@ -204,7 +216,15 @@ public class AdvertController {
 		}
 		return filtered;
 	}
-	
+	ResponseEntity<User> authorizeMe(String header){
+		HttpHeaders headers = new HttpHeaders();
+		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+		headers.add("Authorization", header );
+		HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
+		restTemplate = new RestTemplate();
+		return restTemplate.exchange(serviceUrl, HttpMethod.GET,entity , User.class);
+	}
+
 
 	
 }

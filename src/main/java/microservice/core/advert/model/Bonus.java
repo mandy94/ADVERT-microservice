@@ -12,6 +12,7 @@ public class Bonus {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+	
 	@Column
 	private int value;
 	@Column
@@ -31,6 +32,14 @@ public class Bonus {
 
 	public void setCreator(Long creator) {
 		this.creator = creator;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }

@@ -92,20 +92,20 @@ public class Advert {
 		}
 		public Advert() {}
 		
-		public Advert(AdvertDTO adById) {
-			this.id = adById.getId();
-			this.title= adById.getTitle();
-			this.priceList =adById.getPriceList();
-//			this.manufacturer = adById.getManufacturer();
-//			this.gear = adById.getGear().getTitle();
-//			this.fuel = adById.getFuel().getTitle();
-			this.model = adById.getModel();
-			this.imgmain = adById.getImgmain();
-			this.milage = adById.getMilage();
-			this.kidsSeat = adById.getKidsSeat();
-			this.numberOfKidsSeat = adById.getNumberOfKidsSeat();
-			this.CDWprotection = adById.getCDWprotection();
-		}
+//		public Advert(AdvertDTO adById) {
+//			this.id = adById.getId();
+//			this.title= adById.getTitle();
+//			this.priceList =adById.getPriceList();
+////			this.manufacturer = adById.getManufacturer();
+////			this.gear = adById.getGear().getTitle();
+////			this.fuel = adById.getFuel().getTitle();
+//			this.model = adById.getModel();
+//			this.imgmain = adById.getImgmain();
+//			this.milage = adById.getMilage();
+//			this.kidsSeat = adById.getKidsSeat();
+//			this.numberOfKidsSeat = adById.getNumberOfKidsSeat();
+//			this.CDWprotection = adById.getCDWprotection();
+//		}
 
 		@ManyToOne
 		@JoinColumn(name="user_id")		

@@ -43,6 +43,11 @@ public class PricelistImpl implements PricelistService {
 	public Pricelist getPriceList(long priceList) {
 		return priceListRepository.findById(priceList).orElse(null);
 	}
+
+//	@Override
+//	public Pricelist findById(Pricelist advertsPriceList) {
+//		return price
+//	}
     
   
 

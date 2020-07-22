@@ -36,6 +36,7 @@ public class PricelistController {
 	@Autowired
 	private BonusRepository bonusrepo;
 	
+	
 	protected RestTemplate restTemplate;
 	
 	private String serviceUrl = "http://localhost:8183/api/whoami";
@@ -53,11 +54,11 @@ public class PricelistController {
 		
 	}
 	@PostMapping("/bonus/new")
-	public List<Bonus> getMyBonuses(@RequestHeader("Authorization") String header, @RequestBody Bonus data)throws AccessDeniedException {
+	public List<Bonus> getMyBonuses(@RequestHeader("Authorization") String header, @RequestBody int data)throws AccessDeniedException {
 		User me = authorizeMe(header).getBody();		
 		Bonus nb = new Bonus();
-		nb.setCreator(data.getCreator());
-		nb.setValue(data.getValue());
+		nb.setCreator(me.getId());
+		nb.setValue(data);
 		bonusrepo.save(nb);
 		
 		return bonusrepo.findByCreator(me.getId());		
@@ -70,6 +71,7 @@ public class PricelistController {
 		return  plservice.findByUser(me.getId());
 	
 	}
+	
 	@PostMapping("/new")
 	public List<Pricelist> createNewPricelist( @RequestHeader("Authorization") String header, @RequestBody PricelistDTO data) throws AccessDeniedException {
 		User me = authorizeMe(header).getBody();
@@ -79,7 +81,7 @@ public class PricelistController {
 		newpl.setPricePerKm(data.getPricePerKm());
 		newpl.setCreator(me);
 		newpl.setName(data.getName());
-		
+		newpl.setBonus(data.getBonus());
 		plservice.save(newpl);
 		
 	return plservice.findByUser(me.getId());
@@ -107,6 +109,13 @@ public class PricelistController {
 		plservice.remove(id);
 		return plservice.findByUser(authorizeMe(header).getBody().getId());
 	}
+	@DeleteMapping("bonus/{id}")
+	public List<Bonus> deleteBonus(@RequestHeader("Authorization") String header, @PathVariable Long id)throws AccessDeniedException {
+		bonusrepo.deleteById(id);
+		User me = authorizeMe(header).getBody();
+		return bonusrepo.findByCreator(me.getId());	
+	}
+	
 	
 	ResponseEntity<User> authorizeMe(String header){
 		HttpHeaders headers = new HttpHeaders();

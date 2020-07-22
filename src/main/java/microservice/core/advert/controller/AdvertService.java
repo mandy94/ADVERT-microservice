@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 import microservice.core.advert.model.Advert;
+import microservice.core.advert.model.Bonus;
+import microservice.core.advert.model.Pricelist;
 
 
 public interface AdvertService {
@@ -13,4 +15,5 @@ public interface AdvertService {
 	Advert getAdById(Long id);
 	void save(Advert ad);
 	void removeById(Long id);
+	Pricelist getAdvertsPriceList(Long id);
 }

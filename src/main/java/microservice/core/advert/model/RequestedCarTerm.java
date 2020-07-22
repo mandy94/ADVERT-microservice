@@ -21,6 +21,7 @@ public class RequestedCarTerm {
 	
 	@ManyToOne
 	@JoinColumn(name = "advert_id")
+	@JsonIgnore
 	Advert advert;
 	
 	@ManyToOne

@@ -63,6 +63,7 @@ public class User implements UserDetails {
     private Timestamp lastPasswordResetDate;
     
     @OneToMany(mappedBy = "creator")
+    @JsonIgnore
     private Set<Pricelist> priceLists;
 
 

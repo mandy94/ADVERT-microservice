@@ -17,6 +17,8 @@ public interface PricelistService {
 	void remove(Long id);
 
 	Pricelist getPriceList(long priceList);
+
+//	Pricelist findById(Pricelist advertsPriceList);
 	
 	
 }

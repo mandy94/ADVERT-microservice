@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import microservice.core.advert.model.Advert;
+import microservice.core.advert.model.Pricelist;
 import microservice.core.advert.repository.Advertrepository;
 
 
@@ -45,6 +46,12 @@ public class AdvertServiceImpl implements AdvertService {
 	@Override
 	public List<Advert> findAllAds() {
 		return repo.findAll();
+	}
+
+
+	@Override
+	public Pricelist getAdvertsPriceList(Long id) {
+		return repo.getPriceListFromId(id);
 	}
 
 }

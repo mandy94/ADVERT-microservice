@@ -33,11 +33,12 @@ public class Pricelist {
     
     @Column
     private String name;
+    
     @Column
     private Double bonus;
     
-    @JsonIgnore
     @OneToMany(mappedBy = "priceList", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
     public Set<Advert> advert;
     
     @ManyToOne
