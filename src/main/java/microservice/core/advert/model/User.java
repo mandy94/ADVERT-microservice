@@ -160,6 +160,7 @@ public class User implements UserDetails {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
+    
 
     public Timestamp getLastPasswordResetDate() {
         return lastPasswordResetDate;
