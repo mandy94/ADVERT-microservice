@@ -26,8 +26,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import microservice.core.advert.model.Advert;
-import microservice.core.advert.model.Bonus;
-import microservice.core.advert.model.Image;
 import microservice.core.advert.model.Pricelist;
 import microservice.core.advert.model.SearchAttributes;
 import microservice.core.advert.model.User;
@@ -37,7 +35,6 @@ import microservice.core.advert.model.additions.GearBoxType;
 import microservice.core.advert.model.additions.Manufacturer;
 import microservice.core.advert.model.additions.Model;
 import microservice.core.advert.model.dto.AdvertDAO;
-import microservice.core.advert.model.dto.AdvertDTO;
 import microservice.core.advert.model.dto.PricelistDTO;
 
 
@@ -69,12 +66,10 @@ public class AdvertController {
 	
 	@GetMapping("/advert/{id}/pricelist")
 	public PricelistDTO getPricelistByAdvert(@RequestHeader("Authorization") String header, @PathVariable Long id)throws AccessDeniedException {
-//		User me = authorizeMe(header).getBody();
 		PricelistDTO ret = new PricelistDTO(adservice.getAdvertsPriceList(id));
 		
 		System.out.println(ret);
 		return ret;
-//		return null;	
 		
 	}
 	
@@ -103,6 +98,18 @@ public class AdvertController {
 	public boolean deleteAdById(@PathVariable Long id) {
 		 adservice.removeById(id);
 		 return true;
+	}
+	
+	@DeleteMapping(value="/delete-ad/user/{id}")
+	public void deleteUsersAdvert(@RequestHeader("Authorization") String header, @PathVariable Long id) throws AccessDeniedException {
+			List<Advert> list = adservice.findAll(id);
+			List<Pricelist> prices = pricelistservice.findByUser(id);			
+			
+			for(Advert a: list)
+				adservice.removeById(a.getId());
+			
+			for(Pricelist p : prices)
+				pricelistservice.remove(p.getId());
 	}
 	
 	@PostMapping(value = "/add",
