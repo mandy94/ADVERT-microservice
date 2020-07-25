@@ -56,7 +56,6 @@ public class AdvertController {
 	protected RestTemplate restTemplate;
 	
 	private String serviceUrl = "http://localhost:8183/api/whoami";
-	private String userSrviceUrl = "http://localhost:8183/api/user/";
 	
 	@GetMapping(value="/all", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Advert> getAllAds(@RequestHeader("Authorization") String header) throws AccessDeniedException {

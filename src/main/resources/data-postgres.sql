@@ -59,12 +59,12 @@ INSERT INTO FUEL (title) VALUES ('Gas');
 INSERT INTO FUEL (title) VALUES ('Benzin');
 INSERT INTO FUEL (title) VALUES ('Nafta');
 
-INSERT INTO PRICELIST (cdw,price_per_day, price_per_km, creator_id, name, bonus) VALUES (12000, 3200, 500, 1, 'Prvi', 10);
-INSERT INTO PRICELIST (cdw,price_per_day, price_per_km, creator_id, name, bonus) VALUES (12000, 3000, 700, 4, 'Drugi', 20);
-INSERT INTO PRICELIST (cdw,price_per_day, price_per_km, creator_id, name, bonus) VALUES (12000, 3000, 700, 2, 'Drugi', 20);
-INSERT INTO PRICELIST (cdw,price_per_day, price_per_km, creator_id, name, bonus) VALUES (12000, 3000, 700, 3, 'Drugi', 20);
-INSERT INTO PRICELIST (cdw,price_per_day, price_per_km, creator_id, name, bonus) VALUES (10000, 1200, 500, 5, 'Treci', 0);
-INSERT INTO PRICELIST (cdw,price_per_day, price_per_km, creator_id, name, bonus) VALUES (0, 1000, 100, 5, 'Cetvrti', 5);
+INSERT INTO PRICELIST (cdw,price_per_day, price_per_km, creator_id, name) VALUES (12000, 3200, 500, 1, 'Prvi');
+INSERT INTO PRICELIST (cdw,price_per_day, price_per_km, creator_id, name)VALUES (12000, 3000, 700, 4, 'Drugi');
+INSERT INTO PRICELIST (cdw,price_per_day, price_per_km, creator_id, name) VALUES (12000, 3000, 700, 2, 'Drugi');
+INSERT INTO PRICELIST (cdw,price_per_day, price_per_km, creator_id, name) VALUES (12000, 3000, 700, 3, 'Drugi');
+INSERT INTO PRICELIST (cdw,price_per_day, price_per_km, creator_id, name) VALUES (10000, 1200, 500, 5, 'Treci');
+INSERT INTO PRICELIST (cdw,price_per_day, price_per_km, creator_id, name) VALUES (0, 1000, 100, 5, 'Cetvrti');
 
 INSERT INTO BONUS (creator, value) VALUES(5,5);
 INSERT INTO BONUS (creator, value) VALUES(4,5);
