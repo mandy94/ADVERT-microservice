@@ -63,6 +63,7 @@ public class AdvertController {
 		return adservice.findAllAds();
 	}
 	
+	
 	@GetMapping("/advert/{id}/pricelist")
 	public PricelistDTO getPricelistByAdvert(@RequestHeader("Authorization") String header, @PathVariable Long id)throws AccessDeniedException {
 		PricelistDTO ret = new PricelistDTO(adservice.getAdvertsPriceList(id));
@@ -128,7 +129,7 @@ public class AdvertController {
 		ad.setManufacturer(codebookservice.getManufacturer(adtio.getManufacturer()));
 		ad.setGear(codebookservice.getGearType(adtio.getGear()));
 		ad.setFuel(codebookservice.getFuel(adtio.getFuel()));
-//		ad.setPriceList(pricelistservice.getPriceList(adtio.getPriceList()));
+		ad.setPriceList(pricelistservice.getPriceList(adtio.getPriceList()));
 		System.out.println(pricelistservice.getPriceList(adtio.getPriceList()));
 		
 		ad.setCclass(codebookservice.getCarClass(adtio.getCclass()));
