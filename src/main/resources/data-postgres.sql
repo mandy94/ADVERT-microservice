@@ -88,6 +88,6 @@ INSERT INTO ADVERT (user_id, imgMain,  title, cdwprotection, kids_seat, milage ,
 
 -- External img data -----
 
-copy image_table from 'C:/Users/spahija/Desktop/data/tables.csv';
+copy image_table from 'C:/tables.csv';
 SELECT setval('image_table_id_seq', COALESCE((SELECT MAX(id)+1 FROM image_table), 1), false);
 
