@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -87,7 +88,11 @@ public class AdvertController {
 		else
 			return null;
 	}
-	
+	@PutMapping(value="/update-mil")
+	public void updateMilage(@RequestBody Advert data) {
+		adservice.save(data);
+		System.out.println("New milage:" + data.getId() + " = " +data.getMilage());
+	}
 
 	@GetMapping(value="/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Advert getAdById(@PathVariable Long id) {

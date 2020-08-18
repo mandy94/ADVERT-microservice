@@ -4,7 +4,7 @@
 
  --DROP TABLE USERS ;--IF EXISTS(SELECT * FROM  USERS);
 
-INSERT INTO USERS (username, password, first_name, last_name, email, enabled, last_password_reset_date, status) VALUES ('agnt', '$2a$04$ojOHchifXeLAevDCPwfyX.p0b2MbjyDed5CPk/1IyMBVT1Gl3lZBK', 'Marko', 'Markovic', 'user@example.com', false,'2017-10-01 21:58:58.508-07', 'BLOCK');
+INSERT INTO USERS (username, password, first_name, last_name, email, enabled, last_password_reset_date, status) VALUES ('agnt', '$2a$04$ojOHchifXeLAevDCPwfyX.p0b2MbjyDed5CPk/1IyMBVT1Gl3lZBK', 'Marko', 'Markovic', 'user@example.com', true,'2017-10-01 21:58:58.508-07', 'BLOCK');
 
 INSERT INTO USERS (username, password, first_name, last_name, email, enabled, last_password_reset_date, status) VALUES ('admin', '$2a$04$ojOHchifXeLAevDCPwfyX.p0b2MbjyDed5CPk/1IyMBVT1Gl3lZBK', 'Nikola', 'Nikolic', 'admin@example.com', true, '2017-10-01 18:57:58.508-07', 'ACTIVE');
 
@@ -74,16 +74,15 @@ INSERT INTO BONUS (creator, value) VALUES(5,20);
 
 INSERT INTO CARCLASS (title) VALUES ('SUV');
 
-INSERT INTO ADVERT (user_id, imgMain,  title, cdwprotection, kids_seat, milage , number_of_kids_seat,manufacturer_id, model, gear_id, cclass_id, fuel_id, descrption, price_list_id) VALUES (1,'toyotacamry.jpg', 'Chevrolet SPARK', true, true, 10000, 2, 5, 'SPARK', 2,1,3, 'Predstavnik gradskog automobila koji cilja na kupce nudeći praktičnost, ali i poseban prepoznatljiv i jedinstven izgled. ', 1);
+INSERT INTO ADVERT (user_id, imgMain,  title, cdwprotection, kids_seat, milage , number_of_kids_seat,manufacturer_id, model, gear_id, cclass_id, fuel_id, descrption, price_list_id) VALUES (1,'toyotacamry.jpg', 'Chevrolet SPARK', true, true, 195000, 2, 5, 'SPARK', 2,1,3, 'Predstavnik gradskog automobila koji cilja na kupce nudeći praktičnost, ali i poseban prepoznatljiv i jedinstven izgled. ', 1);
 
-INSERT INTO ADVERT (user_id, imgMain,  title, cdwprotection, kids_seat, milage , number_of_kids_seat,manufacturer_id, model ,gear_id, cclass_id,fuel_id,descrption, price_list_id) VALUES (1,'paugeot208.jpg', 'Peugeot 208', true, true, 10000, 2, 1, '208', 1 ,1,2, 'Najnovija generacija Peugeota 208',1);
+INSERT INTO ADVERT (user_id, imgMain,  title, cdwprotection, kids_seat, milage , number_of_kids_seat,manufacturer_id, model ,gear_id, cclass_id,fuel_id,descrption, price_list_id) VALUES (1,'paugeot208.jpg', 'Peugeot 208', true, true, 132000, 1, '208', 1 ,1,2, 'Najnovija generacija Peugeota 208',1);
 
-INSERT INTO ADVERT (user_id, imgMain,  title, cdwprotection, kids_seat, milage , number_of_kids_seat,manufacturer_id, model , gear_id, cclass_id, fuel_id, price_list_id) VALUES (1,'volkswagen_tiguan.jpg', 'Volkswagen TIGUAN', true, true, 10000, 2, 6,'TIGUAN', 1 ,1,2, 1);
+INSERT INTO ADVERT (user_id, imgMain,  title, cdwprotection, kids_seat, milage , number_of_kids_seat,manufacturer_id, model , gear_id, cclass_id, fuel_id, price_list_id) VALUES (1,'volkswagen_tiguan.jpg', 'Volkswagen TIGUAN', true, true, 189000, 2, 6,'TIGUAN', 1 ,1,2, 1);
 
-INSERT INTO ADVERT (user_id, imgMain,  title, cdwprotection, kids_seat, milage , number_of_kids_seat,manufacturer_id, model, gear_id, cclass_id, fuel_id, price_list_id) VALUES (4,'yugo.jpg', 'Yugo', true, true, 10000, 2, 7,'128', 1 ,1,1, 2);
+INSERT INTO ADVERT (user_id, imgMain,  title, cdwprotection, kids_seat, milage , number_of_kids_seat,manufacturer_id, model, gear_id, cclass_id, fuel_id, price_list_id) VALUES (4,'yugo.jpg', 'Yugo', true, true, 255002, 7,'128', 1 ,1,1, 2);
 
-INSERT INTO ADVERT (user_id, imgMain,  title, cdwprotection, kids_seat, milage , number_of_kids_seat,manufacturer_id, model, gear_id, cclass_id, fuel_id, price_list_id) VALUES (5,'audio_a5.jpg', 'Audio A5', true, true, 10000, 2, 4,'A5', 1 ,1,1, 6);
-
+INSERT INTO ADVERT (user_id, imgMain,  title, cdwprotection, kids_seat, milage , number_of_kids_seat,manufacturer_id, model, gear_id, cclass_id, fuel_id, price_list_id) VALUES (5,'audio_a5.jpg', 'Audio A5', true, true, 212000, 4,'A5', 1 ,1,1, 6);
 
 
 -- External img data -----
