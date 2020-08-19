@@ -75,10 +75,16 @@ public class Advert {
 		@Column
 		private String imgmain;
 	
-		
+		@Column
 		private Float milage;
+		
+		@Column
+		private Float limitMilage;
+		@Column
 		private Boolean kidsSeat;
+		@Column
 		private Integer numberOfKidsSeat;
+		@Column
 		private Boolean CDWprotection;
 		
 		public Advert(AdvertDAO adById) {
@@ -238,6 +244,12 @@ public class Advert {
 
 	public void setDescrption(String descrption) {
 		this.descrption = descrption;
+	}
+	public Float getLimitMilage() {
+		return limitMilage;
+	}
+	public void setLimitMilage(Float limitMilage) {
+		this.limitMilage = limitMilage;
 	}
 
 
