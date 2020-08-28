@@ -25,6 +25,8 @@ public class StatisticData {
 	String advert_name;
 	@Column
 	Long owner_id;
+	@Column 
+	Integer rentNumber;
 	
 	
 	public float getMilage() {
@@ -65,5 +67,13 @@ public class StatisticData {
 
 	public void setAdvert_name(String advert_name) {
 		this.advert_name = advert_name;
+	}
+
+	public Integer getRentNumber() {
+		return rentNumber;
+	}
+
+	public void setRentNumber(Integer rentNumber) {
+		this.rentNumber = rentNumber;
 	}
 }
