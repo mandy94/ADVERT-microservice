@@ -44,10 +44,12 @@ public class PricelistImpl implements PricelistService {
 		return priceListRepository.findById(priceList).orElse(null);
 	}
 
-//	@Override
-//	public Pricelist findById(Pricelist advertsPriceList) {
-//		return price
-//	}
+	@Override
+	public Pricelist getPriceListForAdvert(Long id) {
+		return priceListRepository.findByAdvertId(id);
+	}
+
+
     
   
 

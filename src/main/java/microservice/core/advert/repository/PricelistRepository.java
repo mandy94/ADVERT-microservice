@@ -15,5 +15,7 @@ public interface PricelistRepository extends JpaRepository<Pricelist, Long> {
 	@Query("Select x from Pricelist x where x.creator.id = :id ")   // where r.owner = id  
 	List<Pricelist> getByUser(@Param("id") Long id);
 
+	Pricelist findByAdvertId(Long id);
+
 }
 

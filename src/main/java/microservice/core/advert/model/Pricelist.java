@@ -42,6 +42,7 @@ public class Pricelist {
     public Set<Advert> advert;
     
     @ManyToOne
+    @JsonIgnore
     public User creator;
 
 	public Long getId() {

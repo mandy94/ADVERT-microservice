@@ -18,7 +18,8 @@ public interface PricelistService {
 
 	Pricelist getPriceList(long priceList);
 
-//	Pricelist findById(Pricelist advertsPriceList);
+	Pricelist getPriceListForAdvert(Long id);
+
 	
 	
 }

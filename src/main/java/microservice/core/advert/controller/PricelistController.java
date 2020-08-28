@@ -21,10 +21,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import microservice.core.advert.model.Advert;
 import microservice.core.advert.model.Bonus;
 import microservice.core.advert.model.Pricelist;
 import microservice.core.advert.model.User;
 import microservice.core.advert.model.dto.PricelistDTO;
+import microservice.core.advert.repository.Advertrepository;
 import microservice.core.advert.repository.BonusRepository;
 
 @RestController
@@ -33,19 +35,29 @@ public class PricelistController {
 	
 	@Autowired
 	private PricelistService plservice;
+	
 	@Autowired
 	private BonusRepository bonusrepo;
-	
+
+	@Autowired
+	private Advertrepository advertRepo;
 	
 	protected RestTemplate restTemplate;
 	
 	private String serviceUrl = "http://localhost:8183/api/whoami";
 
+
+	@GetMapping(value="/advert/{id}")
+	public Pricelist getPriceListForAdvert(@PathVariable Long id,@RequestHeader("Authorization") String header)throws AccessDeniedException {
+		Advert ad = advertRepo.findById(id).orElse(null);
+		System.out.println(plservice.getPriceList(id));
+		return plservice.getPriceList(id);
+	}
 	
-	@GetMapping("/all")
-	public List<Pricelist> getAllPricelists() throws AccessDeniedException {
+	@GetMapping("/advert")
+	public String getAllPricelists() throws AccessDeniedException {
 		
-			return null;
+			return "SVE vratio";
 	}
 	@GetMapping("/bonuses/me")
 	public List<Bonus> getMyBonuses(@RequestHeader("Authorization") String header)throws AccessDeniedException {
@@ -68,9 +80,14 @@ public class PricelistController {
 	@GetMapping("/me")
 	public List<Pricelist> getMyPriceLists(@RequestHeader("Authorization") String header) throws AccessDeniedException {
 		User me = authorizeMe(header).getBody();
+		if(me!=null)
 		return  plservice.findByUser(me.getId());
+		else
+		return null;
+	
 	
 	}
+	
 	
 	@PostMapping("/new")
 	public List<Pricelist> createNewPricelist( @RequestHeader("Authorization") String header, @RequestBody PricelistDTO data) throws AccessDeniedException {
@@ -109,7 +126,7 @@ public class PricelistController {
 		plservice.remove(id);
 		return plservice.findByUser(authorizeMe(header).getBody().getId());
 	}
-	@DeleteMapping("bonus/{id}")
+	@DeleteMapping("/bonus/{id}")
 	public List<Bonus> deleteBonus(@RequestHeader("Authorization") String header, @PathVariable Long id)throws AccessDeniedException {
 		bonusrepo.deleteById(id);
 		User me = authorizeMe(header).getBody();
