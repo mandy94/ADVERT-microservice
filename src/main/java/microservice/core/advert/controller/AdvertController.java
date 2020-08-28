@@ -29,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 import microservice.core.advert.model.Advert;
 import microservice.core.advert.model.Pricelist;
 import microservice.core.advert.model.SearchAttributes;
+import microservice.core.advert.model.StatisticData;
 import microservice.core.advert.model.User;
 import microservice.core.advert.model.additions.CarClass;
 import microservice.core.advert.model.additions.Fuel;
@@ -37,6 +38,7 @@ import microservice.core.advert.model.additions.Manufacturer;
 import microservice.core.advert.model.additions.Model;
 import microservice.core.advert.model.dto.AdvertDAO;
 import microservice.core.advert.model.dto.PricelistDTO;
+import microservice.core.advert.repository.StatisticDataRepository;
 
 
 @RestController
@@ -53,6 +55,9 @@ public class AdvertController {
 	private CodebookService codebookservice;
 	@Autowired
 	private PricelistService pricelistservice;
+	
+	@Autowired
+	private StatisticDataRepository statsRepo;
 	
 	protected RestTemplate restTemplate;
 	
@@ -91,7 +96,6 @@ public class AdvertController {
 	@PutMapping(value="/update-mil")
 	public void updateMilage(@RequestBody Advert data) {
 		adservice.save(data);
-		System.out.println("New milage:" + data.getId() + " = " +data.getMilage());
 	}
 
 	@GetMapping(value="/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -135,12 +139,18 @@ public class AdvertController {
 		ad.setGear(codebookservice.getGearType(adtio.getGear()));
 		ad.setFuel(codebookservice.getFuel(adtio.getFuel()));
 		ad.setPriceList(pricelistservice.getPriceList(adtio.getPriceList()));
-		System.out.println(pricelistservice.getPriceList(adtio.getPriceList()));
 		
 		ad.setCclass(codebookservice.getCarClass(adtio.getCclass()));
 		ad.setTitle(ad.getManufacturer().getTitle() + " " + ad.getModel());
 		
-		adservice.save(ad);
+		ad = adservice.save(ad);
+
+		StatisticData newData = new StatisticData();
+		newData.setAdvert_id(ad.getId());
+		newData.setAdvert_name(ad.getTitle());
+		newData.setMilage(ad.getMilage());
+		newData.setOwner_id(owner.getBody().getId());
+		statsRepo.save(newData);
 		if(owner!=null)		{			
 				return adservice.findAll(owner.getBody().getId());
 		}

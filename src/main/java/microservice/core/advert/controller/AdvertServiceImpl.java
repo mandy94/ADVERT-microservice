@@ -31,8 +31,8 @@ public class AdvertServiceImpl implements AdvertService {
 
 
 	@Override
-	public void save(Advert ad) {
-		repo.save(ad);
+	public Advert save(Advert ad) {
+		return repo.save(ad);
 		
 	}
 

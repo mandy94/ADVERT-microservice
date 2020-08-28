@@ -80,6 +80,9 @@ public class Advert {
 		
 		@Column
 		private Float limitMilage;
+		
+
+
 		@Column
 		private Boolean kidsSeat;
 		@Column

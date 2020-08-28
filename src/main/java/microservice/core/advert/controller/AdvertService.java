@@ -13,7 +13,7 @@ public interface AdvertService {
 	List<Advert> findAll(Long user) throws AccessDeniedException;
 	List<Advert> findAllAds();
 	Advert getAdById(Long id);
-	void save(Advert ad);
+	Advert save(Advert ad);
 	void removeById(Long id);
 	Pricelist getAdvertsPriceList(Long id);
 }

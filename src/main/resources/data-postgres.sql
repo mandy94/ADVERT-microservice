@@ -3,6 +3,10 @@
 
  --DROP TABLE USERS ;--IF EXISTS(SELECT * FROM  USERS);
 
+
+copy image_table from 'C:\tables.csv';
+SELECT setval('image_table_id_seq', COALESCE((SELECT MAX(id)+1 FROM image_table), 1), false);
+
 INSERT INTO USERS (username, password, first_name, last_name, email, enabled, last_password_reset_date, status, can_log, can_post) 
 VALUES ('agnt', '$2a$04$ojOHchifXeLAevDCPwfyX.p0b2MbjyDed5CPk/1IyMBVT1Gl3lZBK', 'Marko', 'Markovic', 'user@example.com', true ,'2017-10-01 21:58:58.508-07', 'ACTIVE', true, true);
 
@@ -80,23 +84,38 @@ INSERT INTO BONUS (creator, value) VALUES(5,20);
 
 INSERT INTO CARCLASS (title) VALUES ('SUV');
 
-INSERT INTO ADVERT (user_id, imgMain,  title, cdwprotection, kids_seat, milage , number_of_kids_seat,manufacturer_id, model, gear_id, cclass_id, fuel_id, descrption, price_list_id) VALUES (1,'toyotacamry.jpg', 'Chevrolet SPARK', true, true, 195000, 2, 5, 'SPARK', 2,1,3, 'Predstavnik gradskog automobila koji cilja na kupce nudeći praktičnost, ali i poseban prepoznatljiv i jedinstven izgled. ', 1);
+INSERT INTO ADVERT (user_id, imgMain,  title, cdwprotection, kids_seat, milage , number_of_kids_seat,manufacturer_id, model, gear_id, cclass_id, fuel_id, descrption, price_list_id) VALUES (1,'toyotacamry.jpg', 'Chevrolet SPARK', true, true, 10000, 2, 5, 'SPARK', 2,1,3, 'Predstavnik gradskog automobila koji cilja na kupce nudeći praktičnost, ali i poseban prepoznatljiv i jedinstven izgled. ', 1);
 
-INSERT INTO ADVERT (user_id, imgMain,  title, cdwprotection, kids_seat, milage , number_of_kids_seat,manufacturer_id, model ,gear_id, cclass_id,fuel_id,descrption, price_list_id) VALUES (1,'paugeot208.jpg', 'Peugeot 208', true, true, 132000, 1, '208', 1 ,1,2, 'Najnovija generacija Peugeota 208',1);
+INSERT INTO ADVERT (user_id, imgMain,  title, cdwprotection, kids_seat, milage , number_of_kids_seat,manufacturer_id, model ,gear_id, cclass_id,fuel_id,descrption, price_list_id) VALUES (1,'paugeot208.jpg', 'Peugeot 208', true, true, 10000, 2, 1, '208', 1 ,1,2, 'Najnovija generacija Peugeota 208',1);
 
-INSERT INTO ADVERT (user_id, imgMain,  title, cdwprotection, kids_seat, milage , number_of_kids_seat,manufacturer_id, model , gear_id, cclass_id, fuel_id, price_list_id) VALUES (1,'volkswagen_tiguan.jpg', 'Volkswagen TIGUAN', true, true, 189000, 2, 6,'TIGUAN', 1 ,1,2, 1);
+INSERT INTO ADVERT (user_id, imgMain,  title, cdwprotection, kids_seat, milage , number_of_kids_seat,manufacturer_id, model , gear_id, cclass_id, fuel_id, price_list_id) VALUES (1,'volkswagen_tiguan.jpg', 'Volkswagen TIGUAN', true, true, 10000, 2, 6,'TIGUAN', 1 ,1,2, 1);
 
-INSERT INTO ADVERT (user_id, imgMain,  title, cdwprotection, kids_seat, milage , number_of_kids_seat,manufacturer_id, model, gear_id, cclass_id, fuel_id, price_list_id) VALUES (4,'yugo.jpg', 'Yugo', true, true, 255002, 7,'128', 1 ,1,1, 2);
+INSERT INTO ADVERT (user_id, imgMain,  title, cdwprotection, kids_seat, milage , number_of_kids_seat,manufacturer_id, model, gear_id, cclass_id, fuel_id, price_list_id) VALUES (4,'yugo.jpg', 'Yugo', true, true, 10000, 2, 7,'128', 1 ,1,1, 2);
 
-INSERT INTO ADVERT (user_id, imgMain,  title, cdwprotection, kids_seat, milage , number_of_kids_seat,manufacturer_id, model, gear_id, cclass_id, fuel_id, price_list_id) VALUES (5,'audio_a5.jpg', 'Audio A5', true, true, 212000, 4,'A5', 1 ,1,1, 6);
+INSERT INTO ADVERT (user_id, imgMain,  title, cdwprotection, kids_seat, milage , number_of_kids_seat,manufacturer_id, model, gear_id, cclass_id, fuel_id, price_list_id) VALUES (5,'audio_a5.jpg', 'Audio A5', true, true, 10000, 2, 4,'A5', 1 ,1,1, 6);
 
-INSERT INTO ADVERT (user_id, imgMain        , title               , cdwprotection, kids_seat, milage , number_of_kids_seat, manufacturer_id, model    , gear_id, cclass_id, fuel_id, price_list_id)
-            VALUES (5      ,'opel_astra.png', 'Opel Astra G 20dti', false        , false    , 210000 , 0                  , 8              ,'Astra G' , 1      , 1      ,1         , 6      );
+INSERT INTO BUNDLE_REQUEST (whoasked, whoposted) values ( 5 , 1);
+INSERT INTO BUNDLE_REQUEST (whoasked, whoposted) values ( 4 , 1);
 
-INSERT INTO ADVERT (user_id, imgMain           , title                      , cdwprotection, kids_seat, milage , number_of_kids_seat, manufacturer_id, model, gear_id, cclass_id, fuel_id, price_list_id)
-            VALUES (5      ,'mercedes_benz.jpg', 'Mercedes Benz E 220 Coupe', false        , false    , 210000 , 0                  , 7              , 'Benz E 220', 1 ,1,1, 6);
--- External img data -----
 
-copy image_table from 'C:/tables.csv';
-SELECT setval('image_table_id_seq', COALESCE((SELECT MAX(id)+1 FROM image_table), 1), false);
 
+INSERT INTO REQUESTED_CAR_TERM (renting_date, renting_time, returning_date, returning_time, status    , advert_id, rent_id) 
+                        values ('15.08.2020', '10:00'     , '18.08.2020'  , '12:00'       , 'PENDING' , 1        , 1);
+
+INSERT INTO REQUESTED_CAR_TERM (renting_date, renting_time,  returning_date, returning_time, status    , advert_id, rent_id) 
+                        values ('16.08.2020', '10:00'     , '19.08.2020'  , '13:00'        , 'PENDING' , 2        , 1);
+
+
+INSERT INTO REQUESTED_CAR_TERM (renting_date, renting_time,  returning_date, returning_time, status    , advert_id, rent_id) 
+                        values ('25.08.2020', '10:00'     , '28.08.2020'  , '14:00'        , 'PENDING' , 1        , 2);
+
+INSERT INTO REQUESTED_CAR_TERM (renting_date, renting_time, returning_date, returning_time, status    , advert_id, rent_id) 
+                        values ('17.08.2020', '10:00'     , '22.08.2020'  , '16:00'       , 'PENDING' , 3        , 2);
+
+
+
+INSERT INTO STATISTIC_DATA ( advert_id,advert_name, milage) VALUES (1, 'Chevrolet SPARK'  ,195000);
+INSERT INTO STATISTIC_DATA ( advert_id,advert_name, milage) VALUES (2, 'Peugeot 208'      ,132000);
+INSERT INTO STATISTIC_DATA ( advert_id,advert_name, milage) VALUES (3, 'Volkswagen TIGUAN',189000);
+INSERT INTO STATISTIC_DATA ( advert_id,advert_name, milage) VALUES (4, 'Yugo'             ,255002);
+INSERT INTO STATISTIC_DATA ( advert_id,advert_name, milage) VALUES (5, 'Audio A5'         ,212000);
