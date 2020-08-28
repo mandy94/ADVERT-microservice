@@ -1,19 +1,22 @@
 -- Lozinke su hesovane pomocu BCrypt algoritma https://www.dailycred.com/article/bcrypt-calculator
 -- Lozinka za oba user-a je 123
 
-
  --DROP TABLE USERS ;--IF EXISTS(SELECT * FROM  USERS);
 
-INSERT INTO USERS (username, password, first_name, last_name, email, enabled, last_password_reset_date, status) VALUES ('agnt', '$2a$04$ojOHchifXeLAevDCPwfyX.p0b2MbjyDed5CPk/1IyMBVT1Gl3lZBK', 'Marko', 'Markovic', 'user@example.com', true,'2017-10-01 21:58:58.508-07', 'BLOCK');
+INSERT INTO USERS (username, password, first_name, last_name, email, enabled, last_password_reset_date, status, can_log, can_post) 
+VALUES ('agnt', '$2a$04$ojOHchifXeLAevDCPwfyX.p0b2MbjyDed5CPk/1IyMBVT1Gl3lZBK', 'Marko', 'Markovic', 'user@example.com', true ,'2017-10-01 21:58:58.508-07', 'ACTIVE', true, true);
 
-INSERT INTO USERS (username, password, first_name, last_name, email, enabled, last_password_reset_date, status) VALUES ('admin', '$2a$04$ojOHchifXeLAevDCPwfyX.p0b2MbjyDed5CPk/1IyMBVT1Gl3lZBK', 'Nikola', 'Nikolic', 'admin@example.com', true, '2017-10-01 18:57:58.508-07', 'ACTIVE');
+INSERT INTO USERS (username, password, first_name, last_name, email, enabled, last_password_reset_date, status, can_log, can_post) 
+VALUES ('admin', '$2a$04$ojOHchifXeLAevDCPwfyX.p0b2MbjyDed5CPk/1IyMBVT1Gl3lZBK', 'Nikola', 'Nikolic', 'admin@example.com', true, '2017-10-01 18:57:58.508-07', 'ACTIVE', true, true);
 
-INSERT INTO USERS (username, password, first_name, last_name, email, enabled, last_password_reset_date, status) VALUES ('user', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Maja', 'Savic', 'kupac@example.com', true, '2017-10-01 18:57:58.508-07', 'ACTIVE');
+INSERT INTO USERS (username, password, first_name, last_name, email, enabled, last_password_reset_date, status, can_log, can_post) 
+VALUES ('user', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Maja', 'Savic', 'kupac@example.com', true, '2017-10-01 18:57:58.508-07', 'ACTIVE', true, true);
 
-INSERT INTO USERS (username, password, first_name, last_name, email, enabled, last_password_reset_date, status) VALUES ('peraSaKlise', '$2a$04$WswSnQIAkowjNIN/ZDk8w.LD5PwqdnTJLrRtgxP80uTokxC8LF1xa', 'Pera', 'Peric', 'prea@gmail.com', true, '2017-10-01 18:57:58.508-07', 'ACTIVE');
+INSERT INTO USERS (username, password, first_name, last_name, email, enabled, last_password_reset_date, status, can_log, can_post) 
+VALUES ('peraSaKlise', '$2a$04$WswSnQIAkowjNIN/ZDk8w.LD5PwqdnTJLrRtgxP80uTokxC8LF1xa', 'Pera', 'Peric', 'prea@gmail.com', true, '2017-10-01 18:57:58.508-07', 'ACTIVE', true, true);
 
-INSERT INTO USERS (username, password, first_name, last_name, email, enabled, last_password_reset_date, status) VALUES ('maraSmara' ,'$2a$04$WFggkfJRG7dQKQELGDNXbemRQgSFG6GobpF94XJJ0p/oOu0Ms1.gi', 'Mara', 'Maric', 'merry@gmail.com', true, '2017-10-01 18:57:58.508-07' , 'ACTIVE');
-
+INSERT INTO USERS (username, password, first_name, last_name, email, enabled, last_password_reset_date, status, can_log, can_post)
+ VALUES ('maraSmara' ,'$2a$04$WFggkfJRG7dQKQELGDNXbemRQgSFG6GobpF94XJJ0p/oOu0Ms1.gi', 'Mara', 'Maric', 'merry@gmail.com', true, '2017-10-01 18:57:58.508-07' , 'ACTIVE', true, true);
 
 
 INSERT INTO AUTHORITY (name) VALUES ('ROLE_USER');
@@ -44,6 +47,9 @@ INSERT INTO MANUFACTURER ( title) VALUES ('Audi');  -- 4
 INSERT INTO MANUFACTURER ( title) VALUES ('Shevrolet');  -- 5
 INSERT INTO MANUFACTURER ( title) VALUES ('Volkswagen');  -- 6
 INSERT INTO MANUFACTURER ( title) VALUES ('Zastava');  -- 6
+INSERT INTO MANUFACTURER ( title) VALUES ('Mercedes');  -- 7
+INSERT INTO MANUFACTURER ( title) VALUES ('Opel');  -- 8
+
 
 INSERT INTO CITY ( title, code) VALUES ( 'Novi Sad', 21000);
 INSERT INTO CITY ( title, code) VALUES ( 'Beograd', 11000);
@@ -84,7 +90,11 @@ INSERT INTO ADVERT (user_id, imgMain,  title, cdwprotection, kids_seat, milage ,
 
 INSERT INTO ADVERT (user_id, imgMain,  title, cdwprotection, kids_seat, milage , number_of_kids_seat,manufacturer_id, model, gear_id, cclass_id, fuel_id, price_list_id) VALUES (5,'audio_a5.jpg', 'Audio A5', true, true, 212000, 4,'A5', 1 ,1,1, 6);
 
+INSERT INTO ADVERT (user_id, imgMain        , title               , cdwprotection, kids_seat, milage , number_of_kids_seat, manufacturer_id, model    , gear_id, cclass_id, fuel_id, price_list_id)
+            VALUES (5      ,'opel_astra.png', 'Opel Astra G 20dti', false        , false    , 210000 , 0                  , 8              ,'Astra G' , 1      , 1      ,1         , 6      );
 
+INSERT INTO ADVERT (user_id, imgMain           , title                      , cdwprotection, kids_seat, milage , number_of_kids_seat, manufacturer_id, model, gear_id, cclass_id, fuel_id, price_list_id)
+            VALUES (5      ,'mercedes_benz.jpg', 'Mercedes Benz E 220 Coupe', false        , false    , 210000 , 0                  , 7              , 'Benz E 220', 1 ,1,1, 6);
 -- External img data -----
 
 copy image_table from 'C:/tables.csv';
