@@ -48,10 +48,10 @@ public class PricelistController {
 
 
 	@GetMapping(value="/advert/{id}")
-	public Pricelist getPriceListForAdvert(@PathVariable Long id,@RequestHeader("Authorization") String header)throws AccessDeniedException {
+	public PricelistDTO getPriceListForAdvert(@PathVariable Long id,@RequestHeader("Authorization") String header)throws AccessDeniedException {
 		Advert ad = advertRepo.findById(id).orElse(null);
 		System.out.println(plservice.getPriceList(id));
-		return plservice.getPriceList(id);
+		return new PricelistDTO(plservice.getPriceList(ad.getPriceList().getId()));
 	}
 	
 	@GetMapping("/advert")

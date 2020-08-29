@@ -37,7 +37,7 @@ import microservice.core.advert.model.additions.GearBoxType;
 import microservice.core.advert.model.additions.Manufacturer;
 import microservice.core.advert.model.additions.Model;
 import microservice.core.advert.model.dto.AdvertDAO;
-import microservice.core.advert.model.dto.PricelistDTO;
+import microservice.core.advert.model.dto.AdvertDTO;
 import microservice.core.advert.repository.StatisticDataRepository;
 
 
@@ -68,19 +68,24 @@ public class AdvertController {
 		
 		return adservice.findAllAds();
 	}
-	
-	
-	@GetMapping("/advert/{id}/pricelist")
-	public PricelistDTO getPricelistByAdvert(@RequestHeader("Authorization") String header, @PathVariable Long id)throws AccessDeniedException {
-		PricelistDTO ret = new PricelistDTO(adservice.getAdvertsPriceList(id));
-		
-		System.out.println(ret);
-		return ret;
-		
+	List<AdvertDTO> convertObjectToDTO(List<Advert> ads){
+		List<AdvertDTO> list = new ArrayList<>();
+		for(Advert ad : ads) {
+			list.add(new AdvertDTO(ad));
+		}
+		return list;
+	}
+
+	@GetMapping(value="/advert-card", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<AdvertDTO> getAllAdvertsForCard(@RequestHeader("Authorization") String header) throws AccessDeniedException {			
+			
+		return convertObjectToDTO(adservice.findAllAds());
 	}
 	
+
+
 	@GetMapping(value="/me", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Advert> getMyAds(@RequestHeader("Authorization") String header) throws AccessDeniedException {
+	public List<AdvertDTO> getMyAds(@RequestHeader("Authorization") String header) throws AccessDeniedException {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 		headers.add("Authorization", header );
@@ -88,7 +93,7 @@ public class AdvertController {
 		restTemplate = new RestTemplate();
 		ResponseEntity<User> owner = restTemplate.exchange(serviceUrl, HttpMethod.GET,entity , User.class);
 		if(owner!=null)		{			
-				return adservice.findAll(owner.getBody().getId());
+				return convertObjectToDTO(adservice.findAll(owner.getBody().getId()));
 		}
 		else
 			return null;
@@ -99,10 +104,14 @@ public class AdvertController {
 	}
 
 	@GetMapping(value="/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Advert getAdById(@PathVariable Long id) {
-		return adservice.getAdById(id);
+	public AdvertDTO getAdById(@PathVariable Long id) {
+		return new AdvertDTO(adservice.getAdById(id));
 	}
 	
+	@GetMapping(value="/jpa-object/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Advert getJPAAdById(@PathVariable Long id) {
+		return adservice.getAdById(id);
+	}
 	@DeleteMapping(value="/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public boolean deleteAdById(@PathVariable Long id) {
 		 adservice.removeById(id);
@@ -174,9 +183,11 @@ public class AdvertController {
 
 
 	@PostMapping("/search")
-	public List<Advert> search(@RequestBody SearchAttributes attr){
+	public List<AdvertDTO> search(@RequestBody SearchAttributes attr){
 		List<Advert> filtered = new ArrayList<Advert>();
+		
 		 for(Advert ad : adservice.findAllAds()) {
+			 
 			 boolean pass = false; 
 			for(Model m :attr.getModels()) // MODELS
 			{
@@ -226,17 +237,25 @@ public class AdvertController {
 				{pass = true; break;}
 			}
 			
-			if( attr.getGearType().size()==0)
-				pass = true;
+			Pricelist prices = pricelistservice.getPriceListForAdvert(ad.getId());
 			
+			if( attr.getGearType().size() == 0)
+				if(attr.getMinPrice() <= prices.getPricePerKm())
+					if(attr.getMaxPrice() == -1.0 ||  attr.getMaxPrice() >= prices.getPricePerKm()) 
+						if(attr.getKidsSeat() == -1.0 || attr.getKidsSeat() == ad.getNumberOfKidsSeat() )
+							if(attr.getCdw() == null || attr.getCdw() == ad.getCDWprotection())
+								pass = true;
+		
 			// poslendji if
 			if(pass==false)
 				continue;		
-			
-			if(pass == true)
+			else
 				filtered.add(ad);
+			System.out.println(ad.getNumberOfKidsSeat());
 		}
-		return filtered;
+		 
+		 System.out.println(attr);
+		return convertObjectToDTO(filtered);
 	}
 	ResponseEntity<User> authorizeMe(String header){
 		HttpHeaders headers = new HttpHeaders();

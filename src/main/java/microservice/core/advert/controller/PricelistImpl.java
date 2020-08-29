@@ -49,6 +49,7 @@ public class PricelistImpl implements PricelistService {
 		return priceListRepository.findByAdvertId(id);
 	}
 
+	
 
     
   

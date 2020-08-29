@@ -24,7 +24,6 @@ import microservice.core.advert.model.additions.Fuel;
 import microservice.core.advert.model.additions.GearBoxType;
 import microservice.core.advert.model.additions.Manufacturer;
 import microservice.core.advert.model.dto.AdvertDAO;
-import microservice.core.advert.model.dto.AdvertDTO;
 
 @Entity
 @Table(name = "ADVERT")

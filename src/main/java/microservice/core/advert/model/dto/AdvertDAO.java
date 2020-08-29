@@ -1,8 +1,7 @@
 package microservice.core.advert.model.dto;
 
+
 import microservice.core.advert.model.Advert;
-import microservice.core.advert.model.Pricelist;
-import microservice.core.advert.model.User;
 
 public class AdvertDAO {
 	
@@ -18,8 +17,8 @@ public class AdvertDAO {
     long CDW;
     long numberOfKidsSeat;    
     double milage;
-    long priceList;
-    
+    long priceList;    
+    private Double pricePerKm;
     public AdvertDAO() {}
 	public AdvertDAO(Advert adById) {
 		this.title= adById.getTitle();
@@ -32,6 +31,7 @@ public class AdvertDAO {
 		this.milage = adById.getMilage();
 		this.numberOfKidsSeat = adById.getNumberOfKidsSeat();
 		this.numberOfKidsSeat = adById.getNumberOfKidsSeat();
+		this.pricePerKm= adById.getPriceList().getPricePerKm();
 //		this.CDW = adById.ge;
 	}
 	public String getTitle() {
@@ -105,6 +105,12 @@ public class AdvertDAO {
 	}
 	public void setPriceList(long priceList) {
 		this.priceList = priceList;
+	}
+	public Double getPricePerKm() {
+		return pricePerKm;
+	}
+	public void setPricePerKm(Double pricePerKm) {
+		this.pricePerKm = pricePerKm;
 	}
  
 

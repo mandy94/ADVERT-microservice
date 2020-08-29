@@ -20,6 +20,7 @@ public interface PricelistService {
 
 	Pricelist getPriceListForAdvert(Long id);
 
+
 	
 	
 }

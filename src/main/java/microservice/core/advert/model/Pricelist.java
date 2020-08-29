@@ -39,11 +39,11 @@ public class Pricelist {
     
     @OneToMany(mappedBy = "priceList", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
-    public Set<Advert> advert;
+    private Set<Advert> advert;
     
     @ManyToOne
     @JsonIgnore
-    public User creator;
+    private User creator;
 
 	public Long getId() {
 		return id;
@@ -77,6 +77,22 @@ public class Pricelist {
 		this.cdw = cdw;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Double getBonus() {
+		return bonus;
+	}
+
+	public void setBonus(Double bonus) {
+		this.bonus = bonus;
+	}
+
 	public Set<Advert> getAdvert() {
 		return advert;
 	}
@@ -93,28 +109,6 @@ public class Pricelist {
 		this.creator = creator;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	@Override
-	public String toString() {
-		return "Pricelist [id=" + id + ", pricePerDay=" + pricePerDay + ", pricePerKm=" + pricePerKm + ", cdw=" + cdw
-				+ ", name=" + name + "]";
-	}
-
-	public Double getBonus() {
-		return bonus;
-	}
-
-	public void setBonus(Double bonus) {
-		this.bonus = bonus;
-	}
-    
     
 
 }
